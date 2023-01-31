@@ -50,9 +50,23 @@ class ExerciseActivity : AppCompatActivity() {
         setupExerciseStatusRecyclerView()
     }
 
+    override fun onBackPressed() {
+        customDialogForBackButton()
+    }
+
     private fun customDialogForBackButton(){
         val customDialog = Dialog(this)
         val dialogBinding = DialogCustomBackConfirmationBinding.inflate(layoutInflater)
+        customDialog.setContentView(dialogBinding.root)
+        customDialog.setCanceledOnTouchOutside(false)
+        dialogBinding.btnYes.setOnClickListener{
+            this@ExerciseActivity.finish()
+            customDialog.dismiss()
+        }
+        dialogBinding.btnNo.setOnClickListener{
+            customDialog.dismiss()
+        }
+        customDialog.show()
     }
 
     private fun setupExerciseStatusRecyclerView(){
