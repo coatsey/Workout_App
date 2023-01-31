@@ -1,18 +1,14 @@
 package com.example.workoutapp
 
-import android.media.MediaPlayer
-import android.net.Uri
+import android.app.Dialog
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.speech.tts.TextToSpeech
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.workoutapp.databinding.ActivityExerciseBinding
-import java.lang.Exception
-import java.util.*
+import com.example.workoutapp.databinding.DialogCustomBackConfirmationBinding
 import kotlin.collections.ArrayList
 
 class ExerciseActivity : AppCompatActivity() {
@@ -23,8 +19,10 @@ class ExerciseActivity : AppCompatActivity() {
 
     private var exerciseTimer: CountDownTimer? = null
     private var exerciseProgress = 0
+    private var restTimerDuration: Long = 1
 
     private var binding: ActivityExerciseBinding? = null
+    private var exerciseTimerDuration: Long = 1
 
     private var exerciseList : ArrayList<ExerciseModel>? = null
     private var currentExercisePosition = -1
@@ -45,11 +43,16 @@ class ExerciseActivity : AppCompatActivity() {
         exerciseList = Constants.defaultExerciseList()
 
         binding?.toolbarExercise?.setNavigationOnClickListener {
-            onBackPressed()
+            customDialogForBackButton()
         }
 
         setupRestView()
         setupExerciseStatusRecyclerView()
+    }
+
+    private fun customDialogForBackButton(){
+        val customDialog = Dialog(this)
+        val dialogBinding = DialogCustomBackConfirmationBinding.inflate(layoutInflater)
     }
 
     private fun setupExerciseStatusRecyclerView(){
@@ -107,7 +110,7 @@ class ExerciseActivity : AppCompatActivity() {
 
         binding?.progressBar?.progress = restProgress
 
-        restTimer = object : CountDownTimer(10000, 1000) {
+        restTimer = object : CountDownTimer(restTimerDuration*1000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 restProgress++
                 binding?.progressBar?.progress = 10 - restProgress
@@ -130,7 +133,7 @@ class ExerciseActivity : AppCompatActivity() {
 
         binding?.progressBarExercise?.progress = exerciseProgress
 
-        exerciseTimer = object : CountDownTimer(30000, 1000) {
+        exerciseTimer = object : CountDownTimer(exerciseTimerDuration * 1000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 exerciseProgress++
                 binding?.progressBarExercise?.progress = 30 - exerciseProgress
@@ -140,18 +143,15 @@ class ExerciseActivity : AppCompatActivity() {
 
             override fun onFinish() {
 
-                exerciseList!![currentExercisePosition].setIsSelected(false)
-                exerciseList!![currentExercisePosition].setIsCompleted(true)
-                exerciseAdapter!!.notifyDataSetChanged()
-
                 if(currentExercisePosition <exerciseList?.size!! - 1){
+                    exerciseList!![currentExercisePosition].setIsSelected(false)
+                    exerciseList!![currentExercisePosition].setIsCompleted(true)
+                    exerciseAdapter!!.notifyDataSetChanged()
                     setupRestView()
                 }else{
-                    Toast.makeText(
-                        this@ExerciseActivity,
-                        "Congratulation! You completed the 7 minute workout",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                   finish()
+                    val intent = Intent(this@ExerciseActivity, FinishActivity::class.java)
+                    startActivity(intent)
                 }
             }
         }.start()
