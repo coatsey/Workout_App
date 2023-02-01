@@ -5,6 +5,9 @@
       <map>
         <entry key="..\:/Users/coats/Downloads/kotlin-coroutines-master/WorkoutApp/app/src/main/res/drawable-v24/circular_progress_grey.xml" value="0.2425" />
         <entry key="..\:/Users/coats/Downloads/kotlin-coroutines-master/WorkoutApp/app/src/main/res/drawable/circular_progress_bar.xml" value="0.2425" />
+        <entry key="..\:/Users/coats/Downloads/kotlin-coroutines-master/WorkoutApp/app/src/main/res/drawable/drawable_radio_group_tab_background.xml" value="0.265" />
+        <entry key="..\:/Users/coats/Downloads/kotlin-coroutines-master/WorkoutApp/app/src/main/res/drawable/drawable_units_tab_selector.xml" value="0.265" />
+        <entry key="..\:/Users/coats/Downloads/kotlin-coroutines-master/WorkoutApp/app/src/main/res/drawable/drawable_units_tab_text_color_selector.xml" value="0.265" />
         <entry key="..\:/Users/coats/Downloads/kotlin-coroutines-master/WorkoutApp/app/src/main/res/drawable/item_circilar_color_accent_border.xml" value="0.2425" />
         <entry key="..\:/Users/coats/Downloads/kotlin-coroutines-master/WorkoutApp/app/src/main/res/drawable/item_circular_color_accent_background.xml" value="0.2425" />
         <entry key="..\:/Users/coats/Downloads/kotlin-coroutines-master/WorkoutApp/app/src/main/res/drawable/item_circular_color_gray_background.xml" value="0.2985" />
