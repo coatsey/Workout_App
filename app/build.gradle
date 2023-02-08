@@ -7,6 +7,11 @@ plugins {
 android {
     compileSdk 33
 
+    dataBinding {
+        enabled = true
+    }
+
+
     defaultConfig {
         applicationId "com.example.workoutapp"
         minSdk 22
@@ -44,6 +49,8 @@ dependencies {
     //noinspection GradleDependency
     implementation"androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
+
+    kapt 'com.android.databinding:compiler:3.1.4'
 
     //noinspection GradleDependency
     implementation("androidx.room:room-ktx:2.5.0")
